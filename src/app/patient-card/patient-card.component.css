@@ -1,0 +1,51 @@
+.my-card {
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  elevation: higher;
+  width: 450px;
+  display: flex;
+}
+
+.mat-card-header {
+  min-width: 45%;
+  max-width: 45%;
+  padding-right: 10px;
+}
+
+.mat-icon {
+  width: 22px;
+  padding-right: 1px;
+  padding-left: 2px;
+  font-size: 22px;
+}
+
+.mat-icon-arrow {
+  width: 22px;
+  padding-right: 1px;
+  padding-left: 2px;
+  font-size: 22px;
+  color: white;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.column {
+  flex: 50%;
+  justify-content: center;
+}
+
+.pending {
+  background-color: orange;
+}
+
+.done {
+  background-color: green;
+}
+
+.rejected {
+  background-color: red;
+}

@@ -1,0 +1,54 @@
+<app-top-bar (notifySearch)="onNotifySearch($event)"></app-top-bar>
+
+<div class="filters" *ngIf="nameFilter.length > 0">
+  <p class="filters-title">Name Searched:</p>
+  <mat-chip-list aria-label="Arrhythmia Options">
+    <mat-chip color="primary" selected [removable]="true" (removed)="nameFilter=''">{{ nameFilter }}
+      <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</div>
+
+<div class="filters" *ngIf="arrhythmiaFilters.length > 0">
+  <p class="filters-title">Selected Arrhythmias:</p>
+  <mat-chip-list aria-label="Arrhythmia Options">
+    <div *ngFor="let arrhythmia of arrhythmiaFilters">
+      <mat-chip color="primary" selected [removable]="true"
+                (removed)="removeArrhythmiaFilter(arrhythmia)">{{ arrhythmia }}
+        <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+      </mat-chip>
+    </div>
+  </mat-chip-list>
+</div>
+
+<div class="centralized">
+  <div class="row">
+    <div class="column">
+      <h2 align="center">To Do</h2>
+      <div *ngFor="let patient of (patients | patientStatusNotDone | filters:arrhythmiaFilters:nameFilter)">
+        <app-patient-card [patient]=patient (notifyFilter)="onNotifyFilter($event)"></app-patient-card>
+      </div>
+      <div class="centralized" *ngIf="patients.length === 0">
+        <p>No patients loaded.</p>
+      </div>
+      <div class="centralized" *ngIf="(patients | patientStatusNotDone | filters:arrhythmiaFilters:nameFilter).length === 0">
+        <p>Nothing here</p>
+      </div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="column">
+      <h2 align="center">Done</h2>
+      <div *ngFor="let patient of (patients | patientStatusDone | filters:arrhythmiaFilters:nameFilter)">
+        <app-patient-card [patient]=patient (notifyFilter)="onNotifyFilter($event)"></app-patient-card>
+      </div>
+      <div class="centralized" *ngIf="patients.length === 0">
+        <p>No patients loaded.</p>
+      </div>
+      <div class="centralized" *ngIf="(patients | patientStatusDone | filters:arrhythmiaFilters:nameFilter).length === 0">
+        <p>Nothing here</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

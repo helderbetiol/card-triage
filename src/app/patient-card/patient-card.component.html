@@ -1,0 +1,39 @@
+<mat-card class="my-card">
+  <mat-card-header>
+    <mat-card-title>{{ patient.patient_name }}</mat-card-title>
+      <mat-card-title style="padding-top: 5px"><button [matMenuTriggerFor]="menu"
+            style="justify-self: left"
+            [ngClass]="{
+          'pending': patient.status == status.Pending,
+          'done': patient.status == status.Done,
+          'rejected': patient.status == status.Rejected
+          }">
+      {{ patient.status }} <mat-icon class="mat-icon-arrow">arrow_drop_down</mat-icon>
+    </button></mat-card-title>
+    <mat-menu #menu="matMenu">
+      <div *ngIf="patient.status !== status.Done">
+        <button mat-menu-item (click)="changeStatus(patient)">
+          <mat-icon>check_circle</mat-icon>
+          <span>It's Done!</span>
+        </button>
+      </div>
+      <div *ngIf="patient.status === status.Done">
+        <button mat-menu-item (click)="changeStatus(patient)">
+          <mat-icon>highlight_off</mat-icon>
+          <span>Reject it</span>
+        </button>
+      </div>
+
+    </mat-menu>
+  </mat-card-header>
+  <mat-card-content>
+    <p>ID: {{ patient.id }}</p>
+    <p>Date of Creation: {{ formatDate(patient.created_date) | date: 'shortDate' }}</p>
+    <p>Arrhythmias:</p>
+    <mat-chip-list aria-label="Arrhythmia Options">
+      <div *ngFor="let arrhythmia of patient.arrhythmias">
+        <mat-chip (click)="notifyFilter.emit(arrhythmia)">{{ arrhythmia }}</mat-chip>
+      </div>
+    </mat-chip-list>
+  </mat-card-content>
+</mat-card>

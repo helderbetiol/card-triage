@@ -1,0 +1,9 @@
+<a [routerLink]="['/']">
+  <h1>
+    <mat-icon style="vertical-align: text-top; color: indianred; margin-right: 10px">favorite</mat-icon>
+    Triage Patient Cards
+  </h1>
+</a>
+<input #search class="search-bar" placeholder="Search by name"
+       (keyup.enter)="notifySearch.emit(search.value)">
+
